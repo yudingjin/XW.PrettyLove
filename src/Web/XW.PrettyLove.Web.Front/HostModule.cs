@@ -52,15 +52,16 @@ namespace XW.PrettyLove.Web.Front
             context.Services.AddCors(options =>
             {
                 options.AddPolicy
-                    (name: "myCors",
-                        builde =>
-                        {
-                            builde.WithOrigins(context.Configuration.GetValue<string>("corsUrls").Split(","))
-                            .AllowAnyOrigin()
-                            .AllowAnyHeader()
-                            .AllowAnyMethod();
-                        }
-                    );
+                (
+                    name: "myCors",
+                    builde =>
+                    {
+                        builde.WithOrigins(context.Configuration.GetValue<string>("corsUrls").Split(","))
+                        .AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                    }
+                );
             });
         }
 
