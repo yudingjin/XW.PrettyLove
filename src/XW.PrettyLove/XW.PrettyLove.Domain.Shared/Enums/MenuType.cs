@@ -1,4 +1,4 @@
-﻿namespace LS.ERP.Domain.Shared
+﻿namespace XW.PrettyLove.Domain.Shared
 {
     /// <summary>
     /// 系统菜单类型

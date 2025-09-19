@@ -1,7 +1,7 @@
-﻿using LS.ERP.Domain.Shared;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
+using XW.PrettyLove.Domain.Shared;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     /// <summary>
     /// 数据库表缓存

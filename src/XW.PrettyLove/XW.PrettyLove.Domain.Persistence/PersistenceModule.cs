@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System.Reflection;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     [DependsOn(typeof(CoreModule))]
     public class PersistenceModule : IModule

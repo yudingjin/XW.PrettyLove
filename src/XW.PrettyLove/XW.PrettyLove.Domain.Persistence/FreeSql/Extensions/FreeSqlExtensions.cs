@@ -1,9 +1,9 @@
 ﻿using FreeSql;
 using FreeSql.DataAnnotations;
-using LS.ERP.Domain.Shared;
 using System.Reflection;
+using XW.PrettyLove.Domain.Shared;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     public static class FreeSqlExtensions
     {

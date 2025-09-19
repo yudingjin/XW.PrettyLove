@@ -1,4 +1,4 @@
-﻿namespace LS.ERP.Domain.Shared
+﻿namespace XW.PrettyLove.Domain.Shared
 {
     /// <summary>
     /// 树形节点接口（支持泛型ID类型）

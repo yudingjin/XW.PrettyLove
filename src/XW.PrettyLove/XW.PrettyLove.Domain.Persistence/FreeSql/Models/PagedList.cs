@@ -1,6 +1,6 @@
-﻿using LS.ERP.Domain.Shared;
+﻿using XW.PrettyLove.Domain.Shared;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     /// <summary>
     /// 分页类

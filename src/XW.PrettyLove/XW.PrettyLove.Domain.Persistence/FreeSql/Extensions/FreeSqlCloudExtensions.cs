@@ -1,8 +1,8 @@
 ﻿using FreeSql;
-using LS.ERP.Domain;
 using Microsoft.Extensions.DependencyInjection;
+using XW.PrettyLove.Domain;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     public static class FreeSqlCloudExtensions
     {
@@ -46,8 +46,6 @@ namespace LS.ERP.Infrastructure
             //注册仓储
             services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped(typeof(IDomainService<,>), typeof(DomainService<,>));
-            services.AddScoped(typeof(IDomainService<>), typeof(DomainService<>));
             services.AddScoped<UnitOfWorkManagerCloud>();
             return services;
         }

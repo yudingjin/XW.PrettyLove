@@ -1,4 +1,4 @@
-﻿namespace LS.ERP.Domain.Shared
+﻿namespace XW.PrettyLove.Domain.Shared
 {
     /// <summary>
     /// 配置选项接口 标记

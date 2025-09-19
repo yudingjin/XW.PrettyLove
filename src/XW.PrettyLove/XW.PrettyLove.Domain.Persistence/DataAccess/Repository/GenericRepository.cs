@@ -1,9 +1,9 @@
 ﻿using FreeSql;
-using LS.ERP.Domain;
-using LS.ERP.Domain.Shared;
+using XW.PrettyLove.Domain;
+using XW.PrettyLove.Domain.Shared;
 using System.Linq.Expressions;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     /// <summary>
     /// 泛型仓储

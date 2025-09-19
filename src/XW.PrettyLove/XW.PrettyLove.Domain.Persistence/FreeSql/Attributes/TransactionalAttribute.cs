@@ -1,10 +1,10 @@
 ﻿using FreeSql;
-using LS.ERP.Domain.Shared;
 using Microsoft.Extensions.DependencyInjection;
 using Rougamo.Context;
 using System.Data;
+using XW.PrettyLove.Domain.Shared;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     /// <summary>
     /// 仓储事务特性

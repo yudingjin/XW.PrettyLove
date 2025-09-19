@@ -1,8 +1,8 @@
 ﻿using FreeSql;
-using LS.ERP.Domain.Shared;
 using System.Data;
+using XW.PrettyLove.Domain.Shared;
 
-namespace LS.ERP.Infrastructure
+namespace XW.PrettyLove.Core
 {
     public class UnitOfWorkManagerCloud
     {

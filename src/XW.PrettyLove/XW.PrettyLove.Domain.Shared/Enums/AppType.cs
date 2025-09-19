@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace LS.ERP.Domain.Shared
+namespace XW.PrettyLove.Domain.Shared
 {
     /// <summary>
     /// 应用类型
