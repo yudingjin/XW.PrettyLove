@@ -1,0 +1,6 @@
+@XW.PrettyLove.Web.Front_HostAddress = http://localhost:5181
+
+GET {{XW.PrettyLove.Web.Front_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
