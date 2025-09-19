@@ -12,6 +12,8 @@ namespace XW.PrettyLove.Application
     {
         public void ConfigureServices(ServiceConfigurationContext context)
         {
+            // 泛型服务注入
+            context.Services.AddScoped(typeof(IAppService<>), typeof(AppService<>));
             // 注册程序集服务
             context.Services.AddAssemblyServices(Assembly.GetExecutingAssembly());
             // Exceptionless

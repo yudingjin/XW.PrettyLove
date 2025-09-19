@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\XW.PrettyLove.Application.Contract\XW.PrettyLove.Application.Contract.csproj" />
     <ProjectReference Include="..\XW.PrettyLove.Domain.Persistence\XW.PrettyLove.Domain.Persistence.csproj" />
   </ItemGroup>
 
