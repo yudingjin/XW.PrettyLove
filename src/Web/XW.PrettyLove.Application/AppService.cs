@@ -132,6 +132,16 @@ namespace XW.PrettyLove.Application
         /// </summary>
         /// <param name="predicate"></param>
         /// <returns></returns>
+        public Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return repository.GetAsync(predicate);
+        }
+
+        /// <summary>
+        /// 根据条件查询
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
         public virtual Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return repository.GetListAsync(predicate);

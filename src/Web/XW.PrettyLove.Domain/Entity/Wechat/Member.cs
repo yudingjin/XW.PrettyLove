@@ -1,4 +1,5 @@
 ﻿using FreeSql.DataAnnotations;
+using XW.PrettyLove.Domain.Shared;
 using XW.PrettyLove.Domain.Wechat;
 
 namespace XW.PrettyLove.Domain
@@ -37,7 +38,13 @@ namespace XW.PrettyLove.Domain
         /// 性别 0-未知 1-男 2-女
         /// </summary>
         [Column(IsNullable = false)]
-        public int? Gender { get; set; } = 0;
+        public Gender? Gender { get; set; } = 0;
+
+        /// <summary>
+        /// 国家
+        /// </summary>
+        [Column(IsNullable = false, StringLength = 50)]
+        public string Country { get; set; } = string.Empty;
 
         /// <summary>
         /// 省份
@@ -52,15 +59,21 @@ namespace XW.PrettyLove.Domain
         public string City { get; set; } = string.Empty;
 
         /// <summary>
-        /// 国家
-        /// </summary>
-        [Column(IsNullable = false, StringLength = 50)]
-        public string Country { get; set; } = string.Empty;
-
-        /// <summary>
         /// 手机号码
         /// </summary>
         [Column(IsNullable = false, StringLength = 20)]
         public string Phone { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 微信SessionKey
+        /// </summary>
+        [Column(IsIgnore = true)]
+        public string SessionKey { get; set; }
+
+        /// <summary>
+        /// Token
+        /// </summary>
+        [Column(IsIgnore = true)]
+        public string Token { get; set; }
     }
 }
