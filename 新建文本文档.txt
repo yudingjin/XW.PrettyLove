@@ -1,0 +1,25 @@
+API: SMS/Send - 短信发送
+发送一封测试短信
+
+
+POST URL
+https://api-v4.mysubmail.com/sms/send
+
+
+POST DATA
+appid=your_app_id
+&to=138xxxxxxxx
+&content=【SUBMAIL】您的短信验证码：4438，请在10分钟内输入。
+&signature=your_app_key
+
+
+返回
+{
+    "status": "success",  //请求状态
+    "send_id": "893c91d9bfaa433f6952b2902546a8ed", //唯一send_id
+    "fee": 1 //计费条数
+}
+
+
+
+API: SMS/XSend - 短信模板发送
