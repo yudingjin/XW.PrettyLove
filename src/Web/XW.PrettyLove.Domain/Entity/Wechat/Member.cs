@@ -5,7 +5,7 @@ using XW.PrettyLove.Domain.Wechat;
 namespace XW.PrettyLove.Domain
 {
     /// <summary>
-    /// 微信用户表
+    /// 微信会员表
     /// </summary>
     [Table(Name = "member")]
     public class Member : WechatEntity
@@ -15,12 +15,6 @@ namespace XW.PrettyLove.Domain
         /// </summary>
         [Column(IsNullable = false, StringLength = 50)]
         public string OpenId { get; set; } = string.Empty;
-
-        /// <summary>
-        /// 微信UnionId
-        /// </summary>
-        [Column(IsNullable = false, StringLength = 50)]
-        public string UnionId { get; set; } = string.Empty;
 
         /// <summary>
         /// 用户昵称
@@ -65,7 +59,13 @@ namespace XW.PrettyLove.Domain
         public string Phone { get; set; } = string.Empty;
 
         /// <summary>
-        /// 微信SessionKey
+        /// 最后登录时间
+        /// </summary>
+        [Column(IsNullable = false, StringLength = 20)]
+        public DateTime? LastLoginTime { get; set; }
+
+        /// <summary>
+        /// SessionKey
         /// </summary>
         [Column(IsIgnore = true)]
         public string SessionKey { get; set; }
