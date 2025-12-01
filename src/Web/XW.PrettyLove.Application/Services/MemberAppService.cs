@@ -42,7 +42,6 @@ namespace XW.PrettyLove.Application
                     memberInfo.NickName = requestDto.NickName;
                     memberInfo.EntityStatus = Domain.Shared.EntityStatus.New;
                     memberInfo.OpenId = response.OpenId;
-                    memberInfo.UnionId = response.UnionId;
                     memberInfo.Gender = requestDto.Gender ?? Domain.Shared.Gender.None;
                     memberInfo.AvatarUrl = requestDto.AvatarUrl;
                     memberInfo.Country = requestDto.Country ?? string.Empty;
