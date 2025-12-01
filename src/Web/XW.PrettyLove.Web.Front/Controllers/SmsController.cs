@@ -1,24 +1,35 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using XW.PrettyLove.Application;
 
 namespace XW.PrettyLove.Web.Front.Controllers
 {
-    [AllowAnonymous]
+    /// <summary>
+    /// 短信
+    /// </summary>
     public class SmsController : BaseController
     {
         private readonly ISmsAppService service;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="service"></param>
         public SmsController(ISmsAppService service)
         {
             this.service = service;
         }
 
+        /// <summary>
+        /// 发送短信
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<SmsResponseDTO> SendSmsAsync(string phone, string content)
+        [Route("/api/sms/send")]
+        public async Task<SmsResponseDTO> SendSmsAsync([FromBody] SmsRequestDTO request)
         {
-            return await service.SendSmsAsync(phone, content);
+            return await service.SendSmsAsync(request.Mobile, request.Code);
         }
     }
 }

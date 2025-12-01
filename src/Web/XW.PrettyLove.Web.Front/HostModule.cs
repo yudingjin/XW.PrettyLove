@@ -3,10 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Reflection;
+using System;
 using XW.PrettyLove.Application;
 using XW.PrettyLove.Core;
+using System.IO;
 
 namespace XW.PrettyLove.Web.Front
 {
@@ -38,7 +42,19 @@ namespace XW.PrettyLove.Web.Front
                   options.SerializerSettings.Converters.Add(new LongJsonConverter());
               });
             context.Services.AddEndpointsApiExplorer();
-            context.Services.AddSwaggerGen();
+            context.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("V1", new OpenApiInfo
+                {
+                    Version = "V1",
+                    Title = $"PrettyLove HTTP API V1",
+                    Description = $"PrettyLove HTTP API V1",
+                });
+                c.OrderActionsBy(o => o.RelativePath);
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath, true);
+            });
 
             // 禁用默认模型验证过滤器
             context.Services.Configure<ApiBehaviorOptions>(options =>
@@ -73,7 +89,11 @@ namespace XW.PrettyLove.Web.Front
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint($"/swagger/V1/swagger.json", $"PrettyLove HTTP API V1");
+                    c.RoutePrefix = "swagger";
+                });
             }
             app.UseCors("myCors");
             app.Use(async (context, next) =>

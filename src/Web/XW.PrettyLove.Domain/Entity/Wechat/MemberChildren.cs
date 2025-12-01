@@ -58,6 +58,9 @@ namespace XW.PrettyLove.Domain
         [Column(IsNullable = false, StringLength = 100)]
         public string House { get; set; } = string.Empty;
 
+        /// <summary>
+        /// 车辆情况
+        /// </summary>
         [Column(IsNullable = false, StringLength =100)]
         public string VehicleInfo { get; set; } = string.Empty;
 
@@ -71,13 +74,13 @@ namespace XW.PrettyLove.Domain
         /// 性别
         /// </summary>
         [Column(IsNullable = false)]
-        public Gender Gender { get; set; }
+        public Gender? Gender { get; set; }
 
         /// <summary>
         /// 受教育程度
         /// </summary>
         [Column(IsNullable = false)]
-        public Education Education { get; set; }
+        public Education? Education { get; set; }
 
         /// <summary>
         /// 收入等级
@@ -89,7 +92,7 @@ namespace XW.PrettyLove.Domain
         /// 身高
         /// </summary>
         [Column(IsNullable = false)]
-        public int Height { get; set; }
+        public int? Height { get; set; }
 
         /// <summary>
         /// 介绍
