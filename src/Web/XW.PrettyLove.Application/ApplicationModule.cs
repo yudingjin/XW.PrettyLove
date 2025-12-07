@@ -19,9 +19,9 @@ namespace XW.PrettyLove.Application
             // Exceptionless
             context.Services.ConfigureExceptionless(context.Configuration);
             // CAP
-            context.Services.AddCap(context.Configuration, "/cap");
+            //context.Services.AddCap(context.Configuration, "/cap");
             // OSS注入
-            context.Services.AddOSSService("Minio", "OSSProvider");
+            //context.Services.AddOSSService("Minio", "OSSProvider");
             // Redis
             context.Services.AddRedis(context.Configuration);
             // Mapster

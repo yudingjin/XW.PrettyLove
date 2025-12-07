@@ -1,5 +1,4 @@
-﻿using XW.PrettyLove.Domain.Shared;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -27,34 +26,9 @@ namespace XW.PrettyLove.Core
         public long ID => Convert.ToInt64(GetClaimValueByType("Id").FirstOrDefault());
 
         /// <summary>
-        /// 用户账号
-        /// </summary>
-        public string Account => GetClaimValueByType("Account").FirstOrDefault();
-
-        /// <summary>
         /// 用户名
         /// </summary>
         public string Name => GetClaimValueByType("UserName").FirstOrDefault();
-
-        /// <summary>
-        /// 用户类型
-        /// </summary>
-        public UserType UserType => (UserType)Convert.ToInt32(GetClaimValueByType("UserType").FirstOrDefault());
-
-        /// <summary>
-        /// 组织ID
-        /// </summary>
-        public long TenantId => Convert.ToInt64(GetClaimValueByType("OrgId").FirstOrDefault());
-
-        /// <summary>
-        /// 组织编码
-        /// </summary>
-        public string TenantCode => GetClaimValueByType("OrgCode").FirstOrDefault();
-
-        /// <summary>
-        /// 组织code
-        /// </summary>
-        public string OrgCode => GetClaimValueByType("OrgCode").FirstOrDefault();
 
         /// <summary>
         /// 是否已认证

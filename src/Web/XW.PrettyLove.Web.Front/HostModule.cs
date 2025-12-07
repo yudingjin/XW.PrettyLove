@@ -11,12 +11,20 @@ using System;
 using XW.PrettyLove.Application;
 using XW.PrettyLove.Core;
 using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace XW.PrettyLove.Web.Front
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [DependsOn(typeof(ApplicationModule))]
     public class HostModule : IWebModule
     {
+        /// <summary>
+        /// 服务配置
+        /// </summary>
+        /// <param name="context"></param>
         public void ConfigureServices(ServiceConfigurationContext context)
         {
             //var wexinOption = context.Configuration.GetSection(nameof(WechatOptions)).Get<WechatOptions>();
@@ -64,7 +72,7 @@ namespace XW.PrettyLove.Web.Front
 
             // 添加自定义授权
             context.Services.AddCustomJwtBearer(context.Configuration.GetSection("Jwt").Get<JwtOptions>());
-
+            // 跨域支持
             context.Services.AddCors(options =>
             {
                 options.AddPolicy
@@ -81,11 +89,25 @@ namespace XW.PrettyLove.Web.Front
             });
         }
 
+        /// <summary>
+        /// 应用初始化
+        /// </summary>
+        /// <param name="context"></param>
         public void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var builder = context.Builder.UseSerilogAsync(context.Builder.Configuration);
             var app = builder.Build();
             app.ConfigureApplication();
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "upload")),
+                RequestPath = new Microsoft.AspNetCore.Http.PathString("/static")
+            });
+            app.UseDirectoryBrowser(new DirectoryBrowserOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "upload")),
+                RequestPath = new Microsoft.AspNetCore.Http.PathString("/static")
+            });
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();

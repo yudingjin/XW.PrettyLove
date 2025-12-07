@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using System.Net;
 using System.Threading.Tasks;
 using XW.PrettyLove.Application;
-using XW.PrettyLove.Domain;
+using XW.PrettyLove.Core;
 
 namespace XW.PrettyLove.Web.Front.Controllers
 {
@@ -15,15 +17,18 @@ namespace XW.PrettyLove.Web.Front.Controllers
     [AllowAnonymous]
     public class AccountController : ControllerBase
     {
+        private readonly JwtOptions options;
         private readonly IMemberAppService memberAppService;
 
         /// <summary>
         /// 构造函数
         /// </summary>
         /// <param name="memberAppService"></param>
-        public AccountController(IMemberAppService memberAppService)
+        /// <param name="options"></param>
+        public AccountController(IMemberAppService memberAppService, IOptions<JwtOptions> options)
         {
             this.memberAppService = memberAppService;
+            this.options = options.Value;
         }
 
         /// <summary>
@@ -33,9 +38,19 @@ namespace XW.PrettyLove.Web.Front.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("/api/account/login")]
-        public async Task<Member> LoginAsync(WechatLoginRequestDTO request)
+        public async Task<WechatLoginResponseDTO> LoginAsync(WechatLoginRequestDTO request)
         {
-            return await memberAppService.Login(request);
+            var memberInfo = await memberAppService.Login(request);
+            if (memberInfo == null)
+                throw new FriendlyException("登录失败", HttpStatusCode.InternalServerError);
+            return new WechatLoginResponseDTO
+            {
+                OpenId = memberInfo.OpenId,
+                SessionKey = memberInfo.SessionKey,
+                UserId = memberInfo.Id,
+                UserName = memberInfo.NickName,
+                Token = memberInfo.GetAccessToken(options)
+            };
         }
     }
 }

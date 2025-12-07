@@ -4,11 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace XW.PrettyLove.Web.Front
 {
+    /// <summary>
+    /// 控制器基类
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
     [EnableCors()]
-    public class BaseController : ControllerBase
+    public abstract class BaseController : ControllerBase
     {
 
     }

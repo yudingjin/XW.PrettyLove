@@ -18,16 +18,6 @@ namespace XW.PrettyLove.Core
         string Name { get; }
 
         /// <summary>
-        /// 租户ID
-        /// </summary>
-        long TenantId { get; }
-
-        /// <summary>
-        /// 租户编码
-        /// </summary>
-        string TenantCode { get; }
-
-        /// <summary>
         /// 是否认证
         /// </summary>
         /// <returns></returns>

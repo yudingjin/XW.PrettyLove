@@ -42,4 +42,32 @@ namespace XW.PrettyLove.Application
         /// </summary>
         public string City { get; set; } = string.Empty;
     }
+
+    public class WechatLoginResponseDTO
+    {
+        /// <summary>
+        /// 用户唯一标识
+        /// </summary>
+        public string OpenId { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 会话密钥
+        /// </summary>
+        public string SessionKey { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 昵称
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
+        /// 用户ID
+        /// </summary>
+        public long? UserId { get; set; }
+
+        /// <summary>
+        /// Token
+        /// </summary>
+        public string Token { get; set; }
+    }
 }
