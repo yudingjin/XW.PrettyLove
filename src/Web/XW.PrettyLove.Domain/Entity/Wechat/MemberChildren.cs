@@ -86,7 +86,7 @@ namespace XW.PrettyLove.Domain
         /// 收入等级
         /// </summary>
         [Column(IsNullable = false)]
-        public IncomLevel IncomLevel { get; set; }
+        public IncomLevel? IncomLevel { get; set; }
 
         /// <summary>
         /// 身高

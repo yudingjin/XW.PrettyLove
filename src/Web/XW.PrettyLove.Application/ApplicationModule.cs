@@ -1,7 +1,6 @@
 ﻿using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
-using OnceMi.AspNetCore.OSS;
 using System.Reflection;
 using XW.PrettyLove.Core;
 

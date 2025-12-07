@@ -34,6 +34,7 @@ namespace XW.PrettyLove.Core
                 }
                 context.ExceptionHandled = true;
                 context.Result = new ObjectResult(result);
+                Console.WriteLine(context.Exception.GetErrorMessage());
             }
         }
     }

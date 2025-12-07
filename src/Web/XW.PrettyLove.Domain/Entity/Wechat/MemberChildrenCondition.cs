@@ -14,7 +14,7 @@ namespace XW.PrettyLove.Domain
         /// 子女ID
         /// </summary>
         [Column(IsNullable = false)]
-        public int? ChildId { get; set; }
+        public long? ChildId { get; set; }
 
         /// <summary>
         /// 性别

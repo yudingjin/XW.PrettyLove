@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OnceMi.AspNetCore.OSS;
 using System;
 using System.IO;
 using System.Net;
@@ -16,18 +15,6 @@ namespace XW.PrettyLove.Web.Front.Controllers
     [AllowAnonymous]
     public class FileController : BaseController
     {
-        private readonly IOSSService ossService;
-        private const string defaultBucket = "test";
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="factory"></param>
-        public FileController(IOSSServiceFactory factory)
-        {
-            this.ossService = factory.Create("Minio");
-        }
-
         /// <summary>
         /// 文件上传
         /// </summary>

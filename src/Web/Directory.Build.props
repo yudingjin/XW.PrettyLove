@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <NoWarn>$(NoWarn);SA1005;CS0034;CS0067;CS0108;CS0114;CS0117;CS0162;CS0165;CS0168;CS0226;CS0618;CS0628;CS0649;CS1061;CS5001;CS1591;CS8597;CS8600;CS8601;CS8602;CS8603;CS8604;CS8605;CS8612;CS8619;CS8620;CS8622;CS8625;CS8629;CS8675;CS8676;CS8677;CS8618;CS8625;CS8714;CA1416;1701;1702;CA1416;</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>$(SolutionDir)Lib\Debug</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>$(SolutionDir)Lib\Release</OutputPath>
+  </PropertyGroup>
+</Project>

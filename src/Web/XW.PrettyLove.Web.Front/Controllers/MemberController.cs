@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Net;
 using System.Threading.Tasks;
 using XW.PrettyLove.Application;
@@ -37,19 +36,6 @@ namespace XW.PrettyLove.Web.Front.Controllers
             if (memberInfo == null)
                 throw new FriendlyException("用户不存在", HttpStatusCode.NotFound);
             return memberInfo;
-        }
-
-        /// <summary>
-        /// 修改会员信息
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        [HttpPost]
-        [Route("/api/member/save")]
-        public Member SaveAsync(MemberUpdateDTO request)
-        {
-            throw new NotImplementedException();
         }
     }
 }

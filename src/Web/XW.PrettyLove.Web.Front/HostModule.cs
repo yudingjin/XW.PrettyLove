@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Reflection;
 using System;
+using System.IO;
+using System.Reflection;
 using XW.PrettyLove.Application;
 using XW.PrettyLove.Core;
-using System.IO;
-using Microsoft.Extensions.FileProviders;
 
 namespace XW.PrettyLove.Web.Front
 {
@@ -27,7 +26,6 @@ namespace XW.PrettyLove.Web.Front
         /// <param name="context"></param>
         public void ConfigureServices(ServiceConfigurationContext context)
         {
-            //var wexinOption = context.Configuration.GetSection(nameof(WechatOptions)).Get<WechatOptions>();
             // 解决中文乱码问题
             context.Services.AddControllers(options =>
             {
@@ -98,6 +96,9 @@ namespace XW.PrettyLove.Web.Front
             var builder = context.Builder.UseSerilogAsync(context.Builder.Configuration);
             var app = builder.Build();
             app.ConfigureApplication();
+            var directory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "upload");
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "upload")),
@@ -108,7 +109,6 @@ namespace XW.PrettyLove.Web.Front
                 FileProvider = new PhysicalFileProvider(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "upload")),
                 RequestPath = new Microsoft.AspNetCore.Http.PathString("/static")
             });
-            if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI(c =>
