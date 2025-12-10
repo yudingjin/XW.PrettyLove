@@ -57,7 +57,7 @@ namespace XW.PrettyLove.Web.Front.Controllers
         [Route("/api/children/get")]
         public async Task<ChildrenFormFormDTO> DetailAsync()
         {
-            var memberId = 11;
+            var memberId = aspNetUser.ID;
             var dataInfo = await memberAppService.GetChildrenAsync(memberId);
             if (dataInfo.Item1 == null)
                 throw new FriendlyException("数据不存在", HttpStatusCode.NotFound);

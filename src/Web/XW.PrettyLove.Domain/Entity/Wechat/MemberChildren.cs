@@ -29,6 +29,18 @@ namespace XW.PrettyLove.Domain
         public MaritalStatus? MaritalStatus { get; set; }
 
         /// <summary>
+        /// 打算何时结婚
+        /// </summary>
+        [Column(IsNullable = false)]
+        public ExpectedMarriageTime? ExpectedMarriageTime { get; set; }
+
+        /// <summary>
+        /// 宗教信仰
+        /// </summary>
+        [Column(IsNullable = false)]
+        public Religion? Religion { get; set; }
+
+        /// <summary>
         /// 民族
         /// </summary>
         [Column(IsNullable = false, StringLength = 10)]
@@ -61,7 +73,7 @@ namespace XW.PrettyLove.Domain
         /// <summary>
         /// 车辆情况
         /// </summary>
-        [Column(IsNullable = false, StringLength =100)]
+        [Column(IsNullable = false, StringLength = 100)]
         public string VehicleInfo { get; set; } = string.Empty;
 
         /// <summary>
