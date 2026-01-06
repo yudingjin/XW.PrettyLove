@@ -36,7 +36,7 @@ namespace XW.PrettyLove.Application
         /// </summary>
         /// <param name="requestDto"></param>
         /// <returns></returns>
-        public async Task<Member> Login(WechatLoginRequestDTO requestDto)
+        public async Task<Member> LoginAsync(WechatLoginRequestDTO requestDto)
         {
             var options = new WechatApiClientOptions
             {
@@ -74,6 +74,16 @@ namespace XW.PrettyLove.Application
         }
 
         /// <summary>
+        /// 更新手机号码
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        public async Task<int> UpdatePhoneAsync(Member member)
+        {
+            return await repository.ModifyAsync(member, p => p.Phone);
+        }
+
+        /// <summary>
         /// 获取详情
         /// </summary>
         /// <param name="memberId"></param>
@@ -83,8 +93,8 @@ namespace XW.PrettyLove.Application
             var childInfo = await childRepository.GetAsync(p => p.MemberId == memberId);
             if (childInfo == null)
                 throw new FriendlyException("数据不存在", HttpStatusCode.NotFound);
-            var condtionInfo = await conditionRepository.GetAsync(p => p.ChildId == 11);
-            var imageList = await imageRepository.GetListAsync(p => p.ChildId == 11);
+            var condtionInfo = await conditionRepository.GetAsync(p => p.MemberId == memberId);
+            var imageList = await imageRepository.GetListAsync(p => p.MemberId == memberId);
             return new Tuple<MemberChildren, MemberChildrenCondition, List<MemberChildrenImage>>(childInfo, condtionInfo, imageList);
         }
 
@@ -105,8 +115,12 @@ namespace XW.PrettyLove.Application
                 conditionRepository.Insert(condition);
             else
                 conditionRepository.Modify(condition);
-            imageRepository.Delete(p => p.ChildId == child.Id);
-            imageRepository.Insert(imageList);
+            if (imageList?.Count > 0)
+            {
+                var memberId = imageList[0].MemberId;
+                imageRepository.Delete(p => p.MemberId == memberId);
+                imageRepository.Insert(imageList);
+            }
             return true;
         }
     }

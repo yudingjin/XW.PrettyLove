@@ -26,6 +26,7 @@ namespace XW.PrettyLove.Web.Front.Controllers
         /// 构造函数
         /// </summary>
         /// <param name="appService"></param>
+        /// <param name="memberAppService"></param>
         /// <param name="aspNetUser"></param>
         public ChildrenController(IAppService<MemberChildren> appService, IMemberAppService memberAppService, IAspNetUser aspNetUser)
         {
@@ -79,6 +80,7 @@ namespace XW.PrettyLove.Web.Front.Controllers
             if (child.Id == null)
             {
                 child.Id = YitIdHelper.NextId();
+                child.MemberId = aspNetUser.ID;
                 child.CreatedTime = DateTime.Now;
                 child.EntityStatus = EntityStatus.New;
             }
@@ -90,27 +92,30 @@ namespace XW.PrettyLove.Web.Front.Controllers
             if (childCondition.Id == null)
             {
                 childCondition.Id = YitIdHelper.NextId();
-                childCondition.ChildId = child.Id;
+                childCondition.MemberId = aspNetUser.ID;
                 childCondition.CreatedTime = DateTime.Now;
                 childCondition.EntityStatus = EntityStatus.New;
-
             }
             else
             {
                 childCondition.EntityStatus = EntityStatus.Updated;
             }
             var childImages = request.ImageList.Adapt<List<MemberChildrenImage>>();
-            childImages.ForEach(item =>
+            if (childImages?.Count > 0)
             {
-                item.Id = YitIdHelper.NextId();
-                item.CreatedTime = DateTime.Now;
-                item.EntityStatus = EntityStatus.New;
-                item.ChildId = child.Id;
-            });
+                childImages.ForEach(item =>
+                {
+                    item.Id = YitIdHelper.NextId();
+                    item.CreatedTime = DateTime.Now;
+                    item.EntityStatus = EntityStatus.New;
+                    item.MemberId = aspNetUser.ID;
+                });
+                child.DefaultImageUrl = childImages[0].ImageUrl;
+            }
             var result = memberAppService.Save(child, childCondition, childImages);
             if (!result)
                 throw new FriendlyException("保存失败", HttpStatusCode.InternalServerError);
-            return new ChildrenFormFormDTO(child.Adapt<ChildrenDTO>(), childCondition.Adapt<ChildrenConditionDTO>(), childImages.Adapt<List<ChildrenImageDTO>>());
+            return new ChildrenFormFormDTO(child.Adapt<ChildrenDTO>(), childCondition == null ? childCondition.Adapt<ChildrenConditionDTO>() : null, childImages?.Count >= 0 ? childImages.Adapt<List<ChildrenImageDTO>>() : null);
         }
     }
 }

@@ -11,30 +11,24 @@ namespace XW.PrettyLove.Domain.Shared
         /// 未婚
         /// </summary>
         [Description("未婚")]
-        Single = 0,
+        Unmarried = 0,
 
         /// <summary>
-        /// 已婚
+        /// 离异未育
         /// </summary>
-        [Description("已婚")]
-        Married = 1,
+        [Description("离异未育")]
+        DivorcedWithoutChildren = 1,
 
         /// <summary>
-        /// 离异
+        /// 离异已育
         /// </summary>
-        [Description("离异")]
-        Divorced = 2,
+        [Description("离异已育")]
+        DivorcedWithChildren = 2,
 
         /// <summary>
-        /// 丧偶
+        /// 暂不填写
         /// </summary>
-        [Description("丧偶")]
-        Widowed = 3,
-
-        /// <summary>
-        /// 保密
-        /// </summary>
-        [Description("保密")]
-        Confidential = 99
+        [Description("暂不填写")]
+        NotFilled = 3
     }
 }

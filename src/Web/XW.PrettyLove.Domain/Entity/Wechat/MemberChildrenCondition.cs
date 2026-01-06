@@ -11,10 +11,10 @@ namespace XW.PrettyLove.Domain
     public class MemberChildrenCondition : WechatEntity
     {
         /// <summary>
-        /// 子女ID
+        /// 会员ID
         /// </summary>
         [Column(IsNullable = false)]
-        public long? ChildId { get; set; }
+        public long? MemberId { get; set; }
 
         /// <summary>
         /// 性别
@@ -26,13 +26,7 @@ namespace XW.PrettyLove.Domain
         /// 学历最低要求
         /// </summary>
         [Column(IsNullable = false)]
-        public Education? MinEducation { get; set; }
-
-        /// <summary>
-        /// 学历最高要求
-        /// </summary>
-        [Column(IsNullable = false)]
-        public Education? MaxEducation { get; set; }
+        public EducationRequirement? MinEducation { get; set; }
 
         /// <summary>
         /// 最小年龄

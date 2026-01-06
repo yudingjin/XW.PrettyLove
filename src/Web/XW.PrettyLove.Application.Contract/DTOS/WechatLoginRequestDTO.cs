@@ -70,4 +70,13 @@ namespace XW.PrettyLove.Application
         /// </summary>
         public string Token { get; set; }
     }
+
+    public class DecryptDTO
+    {
+        public string EncryptedData { get; set; }
+
+        public string SessionKey { get; set; }
+
+        public string Iv { get; set; }
+    }
 }

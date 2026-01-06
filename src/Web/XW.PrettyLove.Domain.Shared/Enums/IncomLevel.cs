@@ -1,4 +1,6 @@
-﻿namespace XW.PrettyLove.Domain.Shared
+﻿using System.ComponentModel;
+
+namespace XW.PrettyLove.Domain.Shared
 {
     /// <summary>
     /// 收入等级
@@ -6,43 +8,39 @@
     public enum IncomLevel
     {
         /// <summary>
-        /// 无收入
+        /// 5000以下
         /// </summary>
-        None = 0,
+        [Description("5000以下")]
+        Below5000 = 0,
 
         /// <summary>
-        /// 3000元以下
+        /// 5000-8000
         /// </summary>
-        Below3000 = 1,
+        [Description("5000-8000")]
+        From5000To8000 = 1,
 
         /// <summary>
-        /// 3000-5000元
+        /// 8000-12000
         /// </summary>
-        Level3kTo5k = 2,
-
-        /// <summary>
-        /// 5000-8000元
-        /// </summary>
-        Level5kTo8k = 3,
-
-        /// <summary>
-        /// 8000-12000元
-        /// </summary>
-        Level8kTo12k = 4,
+        [Description("8000-12000")]
+        From8000To12000 = 2,
 
         /// <summary>
         /// 12000-20000
         /// </summary>
-        Level12kTo20k = 5,
+        [Description("12000-20000")]
+        From12000To20000 = 3,
 
         /// <summary>
-        /// 20000元以上
+        /// 20000-50000
         /// </summary>
-        Above20000 = 6,
+        [Description("20000-50000")]
+        From20000To50000 = 4,
 
         /// <summary>
-        /// 保密
+        /// 50000以上
         /// </summary>
-        Confidential = 99
+        [Description("50000以上")]
+        Above50000 = 5
     }
 }

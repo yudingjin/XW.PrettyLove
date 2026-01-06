@@ -9,7 +9,14 @@ namespace XW.PrettyLove.Application
         /// </summary>
         /// <param name="requestDto"></param>
         /// <returns></returns>
-        Task<Member> Login(WechatLoginRequestDTO requestDto);
+        Task<Member> LoginAsync(WechatLoginRequestDTO requestDto);
+
+        /// <summary>
+        /// 更新手机号码
+        /// </summary>
+        /// <param name="member"></param>
+        /// <returns></returns>
+        Task<int> UpdatePhoneAsync(Member member); 
 
         /// <summary>
         /// 获取详情

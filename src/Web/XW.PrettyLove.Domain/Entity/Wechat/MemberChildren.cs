@@ -23,6 +23,18 @@ namespace XW.PrettyLove.Domain
         public string Name { get; set; }
 
         /// <summary>
+        /// 毕业学校
+        /// </summary>
+        [Column(IsNullable = false, StringLength = 50)]
+        public string School { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 出生年份
+        /// </summary>
+        [Column(IsNullable = false)]
+        public string BirthYear { get; set; } = string.Empty;
+
+        /// <summary>
         /// 婚姻状况
         /// </summary>
         [Column(IsNullable = false)]
@@ -32,7 +44,7 @@ namespace XW.PrettyLove.Domain
         /// 打算何时结婚
         /// </summary>
         [Column(IsNullable = false)]
-        public ExpectedMarriageTime? ExpectedMarriageTime { get; set; }
+        public string WhenMarried { get; set; }
 
         /// <summary>
         /// 宗教信仰
@@ -53,10 +65,22 @@ namespace XW.PrettyLove.Domain
         public string Hometown { get; set; } = string.Empty;
 
         /// <summary>
+        /// 家乡默认索引值
+        /// </summary>
+        [Column(IsNullable = false, StringLength = 50)]
+        public string HometownIndex { get; set; } = string.Empty;
+
+        /// <summary>
         /// 现居住地
         /// </summary>
         [Column(IsNullable = false, StringLength = 200)]
         public string Address { get; set; } = string.Empty;
+
+        /// <summary>
+        /// 现居地默认索引值
+        /// </summary>
+        [Column(IsNullable = false, StringLength = 50)]
+        public string AddressIndex { get; set; } = string.Empty;
 
         /// <summary>
         /// 职业
@@ -105,6 +129,12 @@ namespace XW.PrettyLove.Domain
         /// </summary>
         [Column(IsNullable = false)]
         public int? Height { get; set; }
+
+        /// <summary>
+        /// 默认图片地址
+        /// </summary>
+        [Column(IsNullable = false)]
+        public string DefaultImageUrl { get; set; } = string.Empty;
 
         /// <summary>
         /// 介绍

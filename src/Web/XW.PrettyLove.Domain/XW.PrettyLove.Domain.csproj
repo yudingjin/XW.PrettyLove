@@ -5,6 +5,12 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release'">
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="FreeSql" Version="3.5.208" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />

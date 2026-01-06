@@ -40,7 +40,7 @@ namespace XW.PrettyLove.Web.Front.Controllers
         [Route("/api/account/login")]
         public async Task<WechatLoginResponseDTO> LoginAsync(WechatLoginRequestDTO request)
         {
-            var memberInfo = await memberAppService.Login(request);
+            var memberInfo = await memberAppService.LoginAsync(request);
             if (memberInfo == null)
                 throw new FriendlyException("登录失败", HttpStatusCode.InternalServerError);
             return new WechatLoginResponseDTO

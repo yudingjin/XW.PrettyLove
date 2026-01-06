@@ -10,10 +10,10 @@ namespace XW.PrettyLove.Domain
     public class MemberChildrenImage : WechatEntity
     {
         /// <summary>
-        /// 子女ID
+        /// 会员ID
         /// </summary>
         [Column(IsNullable = false)]
-        public long? ChildId { get; set; }
+        public long? MemberId { get; set; }
 
         /// <summary>
         /// 图片地址

@@ -8,6 +8,7 @@ namespace XW.PrettyLove.Domain
     /// 泛型仓储接口
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TKey"></typeparam>
     public interface IGenericRepository<TEntity, TKey>
         where TEntity : class, IEntity<TKey>, new()
         where TKey : struct, IEquatable<TKey>
@@ -464,7 +465,6 @@ namespace XW.PrettyLove.Domain
         /// </summary>
         /// <typeparam name="TReturn"></typeparam>
         /// <param name="predicate"></param>
-        /// <param name="expression"></param>
         /// <returns></returns>
         List<TReturn> GetList<TReturn>(Expression<Func<TEntity, bool>> predicate) where TReturn : class;
 
@@ -483,6 +483,7 @@ namespace XW.PrettyLove.Domain
         /// <typeparam name="TReturn"></typeparam>
         /// <param name="predicate"></param>
         /// <param name="expression"></param>
+        /// <param name="maxNum"></param>
         /// <returns></returns>
         List<TReturn> GetList<TReturn>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TReturn>> expression, int maxNum) where TReturn : class;
 
@@ -509,6 +510,7 @@ namespace XW.PrettyLove.Domain
         /// <typeparam name="TReturn"></typeparam>
         /// <param name="predicate"></param>
         /// <param name="expression"></param>
+        /// <param name="maxNum"></param>
         /// <returns></returns>
         Task<List<TReturn>> GetListAsync<TReturn>(Expression<Func<TEntity, bool>> predicate, Expression<Func<TEntity, TReturn>> expression, int maxNum) where TReturn : class;
 
