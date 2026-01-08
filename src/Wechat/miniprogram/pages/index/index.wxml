@@ -1,0 +1,4 @@
+<view class="container">
+    <van-button type="primary">登录</van-button>
+    <van-button type="primary">注册</van-button>
+</view>
