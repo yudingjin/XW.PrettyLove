@@ -5,8 +5,6 @@
   "window": {
     "navigationBarTextStyle": "black"
   },
-  "style": "v2",
-  "renderer": "skyline",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents"
 }

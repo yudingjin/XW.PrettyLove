@@ -5,16 +5,23 @@
     "minified": true,
     "uglifyFileName": false,
     "enhance": true,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./miniprogram"
+      }
+    ],
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useCompilerPlugins": false,
+    "useCompilerPlugins": ["sass"],
     "minifyWXML": true
   },
   "compileType": "miniprogram",
+  "miniprogramRoot": "miniprogram/",
   "simulatorPluginLibVersion": {},
   "packOptions": {
     "ignore": [],
