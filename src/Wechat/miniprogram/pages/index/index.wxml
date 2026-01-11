@@ -14,3 +14,9 @@
     <!-- 在点击提交按钮的时候，会触发表单的bindsubmit事件 -->
     <button type="primary" plain form-type="submit">点击获取昵称</button>
 </form>
+<view class="line"></view>
+<button open-type="share" type="primary" plain="true">转发</button>
+<view class="line"></view>
+<button open-type="getPhoneNumber" bindgetphonenumber="getphonenumber" type="primary">快速验证组件</button>
+<view class="line"></view>
+<button open-type="getRealtimePhoneNumber" bindgetrealtimephonenumber="getrealtimephonenumber" type="primary">实时验证组件</button>

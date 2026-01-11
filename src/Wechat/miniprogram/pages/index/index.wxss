@@ -24,3 +24,7 @@ input {
 .btnGet {
     margin: 0rpx 100rpx;
 }
+
+.line{
+  margin-top: 100rpx;
+}
