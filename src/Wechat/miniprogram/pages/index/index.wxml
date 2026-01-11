@@ -1,4 +1,7 @@
-<view class="container">
-    <van-button type="primary">登录</van-button>
-    <van-button type="primary">注册</van-button>
-</view>
+<!--index.wxml-->
+<navigation-bar title="Weixin" back="{{false}}" color="black" background="#FFF"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    Weixin
+  </view>
+</scroll-view>

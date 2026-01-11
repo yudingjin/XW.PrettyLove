@@ -1,15 +1,16 @@
 {
-  "name": "miniprogram-ts-sass-quickstart",
+  "name": "wechat",
   "version": "1.0.0",
   "description": "",
+  "main": ".eslintrc.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "",
+  "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
-  },
-  "devDependencies": {
-    "miniprogram-api-typings": "^2.8.3-1"
+    "@vant/weapp": "^1.11.7"
   }
 }
