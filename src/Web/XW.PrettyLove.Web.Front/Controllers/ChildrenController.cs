@@ -19,6 +19,8 @@ namespace XW.PrettyLove.Web.Front.Controllers
     public class ChildrenController : BaseController
     {
         private readonly IAppService<MemberChildren> appService;
+        private readonly IGenericRepository<MemberChildren> childRepository;
+        private readonly IGenericRepository<MemberChildrenCondition> conditionRepository;
         private readonly IMemberAppService memberAppService;
         private readonly IAspNetUser aspNetUser;
 
@@ -26,11 +28,22 @@ namespace XW.PrettyLove.Web.Front.Controllers
         /// 构造函数
         /// </summary>
         /// <param name="appService"></param>
+        /// <param name="childRepository"></param>
+        /// <param name="conditionRepository"></param>
         /// <param name="memberAppService"></param>
         /// <param name="aspNetUser"></param>
-        public ChildrenController(IAppService<MemberChildren> appService, IMemberAppService memberAppService, IAspNetUser aspNetUser)
+        public ChildrenController
+        (
+            IAppService<MemberChildren> appService,
+            IGenericRepository<MemberChildren> childRepository,
+            IGenericRepository<MemberChildrenCondition> conditionRepository,
+            IMemberAppService memberAppService,
+            IAspNetUser aspNetUser
+        )
         {
             this.appService = appService;
+            this.childRepository = childRepository;
+            this.conditionRepository = conditionRepository;
             this.memberAppService = memberAppService;
             this.aspNetUser = aspNetUser;
         }
@@ -72,12 +85,14 @@ namespace XW.PrettyLove.Web.Front.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("/api/children/save")]
-        public ChildrenFormFormDTO Save([FromBody] ChildrenFormFormDTO request)
+        public async Task<ChildrenFormFormDTO> Save([FromBody] ChildrenFormFormDTO request)
         {
             if (request == null)
                 throw new FriendlyException("参数错误", HttpStatusCode.BadRequest);
+
+            var childInfo = await childRepository.GetAsync(p => p.MemberId == aspNetUser.ID);
             var child = request.Basic.Adapt<MemberChildren>();
-            if (child.Id == null)
+            if (childInfo == null)
             {
                 child.Id = YitIdHelper.NextId();
                 child.MemberId = aspNetUser.ID;
@@ -86,19 +101,29 @@ namespace XW.PrettyLove.Web.Front.Controllers
             }
             else
             {
+                child.Id = childInfo.Id;
+                child.MemberId = childInfo.MemberId;
+                child.CreatedTime = childInfo.CreatedTime;
                 child.EntityStatus = EntityStatus.Updated;
             }
             var childCondition = request.Condition.Adapt<MemberChildrenCondition>();
-            if (childCondition.Id == null)
+            if (childCondition != null)
             {
-                childCondition.Id = YitIdHelper.NextId();
-                childCondition.MemberId = aspNetUser.ID;
-                childCondition.CreatedTime = DateTime.Now;
-                childCondition.EntityStatus = EntityStatus.New;
-            }
-            else
-            {
-                childCondition.EntityStatus = EntityStatus.Updated;
+                var conditionInfo = await conditionRepository.GetAsync(p => p.MemberId == aspNetUser.ID);
+                if (conditionInfo == null)
+                {
+                    childCondition.Id = YitIdHelper.NextId();
+                    childCondition.MemberId = aspNetUser.ID;
+                    childCondition.CreatedTime = DateTime.Now;
+                    childCondition.EntityStatus = EntityStatus.New;
+                }
+                else
+                {
+                    childCondition.Id = conditionInfo.Id;
+                    childCondition.MemberId = conditionInfo.MemberId;
+                    childCondition.CreatedTime = conditionInfo.CreatedTime;
+                    childCondition.EntityStatus = EntityStatus.Updated;
+                }
             }
             var childImages = request.ImageList.Adapt<List<MemberChildrenImage>>();
             if (childImages?.Count > 0)
