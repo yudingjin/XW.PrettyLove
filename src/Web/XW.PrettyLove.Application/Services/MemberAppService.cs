@@ -111,10 +111,13 @@ namespace XW.PrettyLove.Application
                 childRepository.Insert(child);
             else
                 childRepository.Modify(child);
-            if (condition.EntityStatus == Domain.Shared.EntityStatus.New)
-                conditionRepository.Insert(condition);
-            else
-                conditionRepository.Modify(condition);
+            if (condition != null)
+            {
+                if (condition.EntityStatus == Domain.Shared.EntityStatus.New)
+                    conditionRepository.Insert(condition);
+                else
+                    conditionRepository.Modify(condition);
+            }
             if (imageList?.Count > 0)
             {
                 var memberId = imageList[0].MemberId;
