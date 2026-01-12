@@ -18,7 +18,7 @@ namespace XW.PrettyLove.Domain
         /// <summary>
         /// 图片地址
         /// </summary>
-        [Column(IsNullable = false)]
-        public string ImageUrl { get; set; }
+        [Column(IsNullable = false, StringLength = 200)]
+        public string Url { get; set; }
     }
 }

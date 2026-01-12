@@ -31,8 +31,8 @@ namespace XW.PrettyLove.Domain
         /// <summary>
         /// 出生年份
         /// </summary>
-        [Column(IsNullable = false)]
-        public string BirthYear { get; set; } = string.Empty;
+        [Column(IsNullable = true)]
+        public DateTime? BirthYear { get; set; }
 
         /// <summary>
         /// 婚姻状况

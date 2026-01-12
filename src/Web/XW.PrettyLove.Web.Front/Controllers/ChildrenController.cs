@@ -18,7 +18,6 @@ namespace XW.PrettyLove.Web.Front.Controllers
     [Route("api/children")]
     public class ChildrenController : BaseController
     {
-        private readonly IAppService<MemberChildren> appService;
         private readonly IGenericRepository<MemberChildren> childRepository;
         private readonly IGenericRepository<MemberChildrenCondition> conditionRepository;
         private readonly IMemberAppService memberAppService;
@@ -27,21 +26,18 @@ namespace XW.PrettyLove.Web.Front.Controllers
         /// <summary>
         /// 构造函数
         /// </summary>
-        /// <param name="appService"></param>
         /// <param name="childRepository"></param>
         /// <param name="conditionRepository"></param>
         /// <param name="memberAppService"></param>
         /// <param name="aspNetUser"></param>
         public ChildrenController
         (
-            IAppService<MemberChildren> appService,
             IGenericRepository<MemberChildren> childRepository,
             IGenericRepository<MemberChildrenCondition> conditionRepository,
             IMemberAppService memberAppService,
             IAspNetUser aspNetUser
         )
         {
-            this.appService = appService;
             this.childRepository = childRepository;
             this.conditionRepository = conditionRepository;
             this.memberAppService = memberAppService;
@@ -57,7 +53,7 @@ namespace XW.PrettyLove.Web.Front.Controllers
         [Route("/api/children/page")]
         public async Task<IPagedList<MemberChildren>> PageAsync([FromBody] ChildrenPagedRequestDTO request)
         {
-            var pagedList = await appService.GetPagedListAsync(p => p.Id > 0, request.PageIndex, request.PageSize);
+            var pagedList = await memberAppService.GetPagedListAsync(request.Gender, request.MinAge, request.MaxAge, request.MinHeight, request.MaxHeight, request.PageIndex, request.PageIndex);
             if (pagedList.Data?.Count <= 0)
                 throw new FriendlyException("没有数据", HttpStatusCode.BadRequest);
             return pagedList;
@@ -73,6 +69,20 @@ namespace XW.PrettyLove.Web.Front.Controllers
         {
             var memberId = aspNetUser.ID;
             var dataInfo = await memberAppService.GetChildrenAsync(memberId);
+            if (dataInfo.Item1 == null)
+                throw new FriendlyException("数据不存在", HttpStatusCode.NotFound);
+            return new ChildrenFormFormDTO(dataInfo.Item1.Adapt<ChildrenDTO>(), dataInfo.Item2.Adapt<ChildrenConditionDTO>(), dataInfo.Item3.Adapt<List<ChildrenImageDTO>>());
+        }
+
+        /// <summary>
+        /// 获取子女详情
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("/api/children/{memberId}")]
+        public async Task<ChildrenFormFormDTO> OneAsync(long? memberId)
+        {
+            var dataInfo = await memberAppService.GetAsync(memberId);
             if (dataInfo.Item1 == null)
                 throw new FriendlyException("数据不存在", HttpStatusCode.NotFound);
             return new ChildrenFormFormDTO(dataInfo.Item1.Adapt<ChildrenDTO>(), dataInfo.Item2.Adapt<ChildrenConditionDTO>(), dataInfo.Item3.Adapt<List<ChildrenImageDTO>>());
@@ -135,12 +145,12 @@ namespace XW.PrettyLove.Web.Front.Controllers
                     item.EntityStatus = EntityStatus.New;
                     item.MemberId = aspNetUser.ID;
                 });
-                child.DefaultImageUrl = childImages[0].ImageUrl;
+                child.DefaultImageUrl = childImages[0].Url;
             }
             var result = memberAppService.Save(child, childCondition, childImages);
             if (!result)
                 throw new FriendlyException("保存失败", HttpStatusCode.InternalServerError);
-            return new ChildrenFormFormDTO(child.Adapt<ChildrenDTO>(), childCondition == null ? childCondition.Adapt<ChildrenConditionDTO>() : null, childImages?.Count >= 0 ? childImages.Adapt<List<ChildrenImageDTO>>() : null);
+            return new ChildrenFormFormDTO(child.Adapt<ChildrenDTO>(), childCondition != null ? childCondition.Adapt<ChildrenConditionDTO>() : null, childImages?.Count >= 0 ? childImages.Adapt<List<ChildrenImageDTO>>() : null);
         }
     }
 }
