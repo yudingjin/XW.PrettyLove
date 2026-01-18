@@ -10,6 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using XW.PrettyLove.Application;
 using XW.PrettyLove.Core;
+using XW.PrettyLove.Domain;
+using Yitter.IdGenerator;
 
 namespace XW.PrettyLove.Web.Front.Controllers
 {
@@ -20,6 +22,7 @@ namespace XW.PrettyLove.Web.Front.Controllers
     {
         private readonly IMemberAppService service;
         private readonly IAspNetUser aspNetUser;
+        private readonly IGenericRepository<MemberSuggestion> suggestionRepository;
         private readonly JwtOptions options;
 
         /// <summary>
@@ -28,11 +31,12 @@ namespace XW.PrettyLove.Web.Front.Controllers
         /// <param name="service"></param>
         /// <param name="options"></param>
         /// <param name="aspNetUser"></param>
-        public MemberController(IMemberAppService service, IOptions<JwtOptions> options, IAspNetUser aspNetUser)
+        public MemberController(IMemberAppService service, IOptions<JwtOptions> options, IAspNetUser aspNetUser, IGenericRepository<MemberSuggestion> suggestionRepository)
         {
             this.service = service;
             this.options = options.Value;
             this.aspNetUser = aspNetUser;
+            this.suggestionRepository = suggestionRepository;
         }
 
         /// <summary>
@@ -61,6 +65,25 @@ namespace XW.PrettyLove.Web.Front.Controllers
             };
         }
 
+        [HttpPost]
+        [Route("/api/suggestion")]
+        public async Task<int> SubmitSuggestion([FromBody] MemberSuggestionFormDTO form)
+        {
+            if (form == null)
+                throw new FriendlyException("参数不能为空", HttpStatusCode.BadRequest);
+            if (form.Content.Length > 200)
+                throw new FriendlyException("建议内容不能超过200字", HttpStatusCode.BadRequest);
+            var suggestion = new MemberSuggestion
+            {
+                Id = YitIdHelper.NextId(),
+                Content = form.Content,
+                MemberId = aspNetUser?.ID ?? 0,
+                CreatedTime = DateTime.Now,
+                Status = 0
+            };
+            return await suggestionRepository.InsertAsync(suggestion);
+        }
+
         /// <summary>
         /// 解析手机号码
         /// </summary>
@@ -68,7 +91,6 @@ namespace XW.PrettyLove.Web.Front.Controllers
         /// <returns></returns>
         [Route("/api/member/decryptPhone")]
         [HttpPost]
-        [Authorize]
         public async Task<string> DecryptPhoneNumber(DecryptDTO dto)
         {
             if (string.IsNullOrEmpty(dto.EncryptedData) || string.IsNullOrEmpty(dto.SessionKey) || string.IsNullOrEmpty(dto.Iv))

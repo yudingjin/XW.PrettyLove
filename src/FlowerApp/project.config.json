@@ -17,8 +17,18 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useCompilerPlugins": ["sass"],
-    "minifyWXML": true
+    "useCompilerPlugins": [
+      "sass"
+    ],
+    "minifyWXML": true,
+    "compileWorklet": false,
+    "uploadWithSourceMap": true,
+    "minifyWXSS": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "condition": false,
+    "swc": false,
+    "disableSWC": true
   },
   "compileType": "miniprogram",
   "miniprogramRoot": "miniprogram/",
@@ -28,5 +38,6 @@
     "include": []
   },
   "appid": "wxa2b898115804acba",
-  "editorSetting": {}
+  "editorSetting": {},
+  "libVersion": "3.13.1"
 }
