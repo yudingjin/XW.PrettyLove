@@ -34,7 +34,7 @@ namespace PrettyLove.Web.Front.Controllers
         /// <summary>
         /// 登录
         /// </summary>
-        /// <param name="request"></param>
+        /// <param name="request">请求参数</param>
         /// <returns></returns>
         [HttpPost]
         [Route("/api/account/login")]

@@ -49,7 +49,7 @@ namespace PrettyLove.Web.Front.Controllers
         /// <summary>
         /// 根据ID获取Member信息
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">会员ID</param>
         /// <returns></returns>
         [HttpGet]
         [Route("/api/member/get")]
@@ -72,6 +72,11 @@ namespace PrettyLove.Web.Front.Controllers
             };
         }
 
+        /// <summary>
+        /// 提交用户反馈
+        /// </summary>
+        /// <param name="form"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("/api/suggestion")]
         public async Task<int> SubmitSuggestion([FromBody] MemberSuggestionFormDTO form)

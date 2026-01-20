@@ -6,11 +6,11 @@ using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using PrettyLove.Application;
+using PrettyLove.Core;
 using System;
 using System.IO;
 using System.Reflection;
-using PrettyLove.Application;
-using PrettyLove.Core;
 
 namespace PrettyLove.Web.Front
 {
@@ -55,6 +55,29 @@ namespace PrettyLove.Web.Front
                     Version = "V1",
                     Title = $"PrettyLove HTTP API V1",
                     Description = $"PrettyLove HTTP API V1",
+                });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "输入请求头中需要添加Jwt授权Token：Bearer Token",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme(new OpenApiSecurityScheme(new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        })),
+                        new string[] { }
+                    }
                 });
                 c.OrderActionsBy(o => o.RelativePath);
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

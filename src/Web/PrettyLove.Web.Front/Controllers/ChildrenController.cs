@@ -60,7 +60,7 @@ namespace PrettyLove.Web.Front.Controllers
         }
 
         /// <summary>
-        /// 获取子女详情
+        /// 获取当前会员的子女详情
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -75,8 +75,9 @@ namespace PrettyLove.Web.Front.Controllers
         }
 
         /// <summary>
-        /// 获取子女详情
+        /// 根据会员ID获取子女详情
         /// </summary>
+        /// <param name="memberId">会员ID</param>
         /// <returns></returns>
         [HttpGet]
         [Route("/api/children/{memberId}")]
@@ -89,7 +90,7 @@ namespace PrettyLove.Web.Front.Controllers
         }
 
         /// <summary>
-        /// 保存
+        /// 子女信息保存
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
